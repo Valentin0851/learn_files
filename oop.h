@@ -1,4 +1,4 @@
-#include<includes.h>
+#include"includes.h"
 
 // Делегирующий конструктор
 struct S {
@@ -47,6 +47,26 @@ private:
   int* arr_ = nullptr;
   size_t size_ = 0;
 };
+
+template<typename T>
+T GetMax(const T& a, const T& b) {
+    return a > b ? a : b;
+}
+template <typename T>
+class vector {
+  private:
+    T* arr_ = nullptr;
+};
+
+template <typename T>
+struct Vector {
+    template <typename U>
+    void push_back(const U&);
+};
+
+template <typename T>
+template <typename U>
+void Vector<T>::push_back(const U&) {}
 
 
 
