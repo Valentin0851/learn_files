@@ -35,100 +35,68 @@ void insertion_sort(std::vector<int> &arr)
     }
 }
 
-// quick sort
+void QuickSort(std::vector<int>& arr, const int left, const int right) {
 
-int partition(int list[], int start, int pivot)
-{
-    int i = start;
-    while (i < pivot)
-    {
-        if (list[i] > list[pivot] && i == pivot - 1)
-        {
-            std::swap(list[i], list[pivot]);
-            pivot--;
-        }
+int i = left, j = right;
+const int pivot = arr[(left + right) / 2];
 
-        else if (list[i] > list[pivot])
-        {
-            std::swap(list[pivot - 1], list[pivot]);
-            std::swap(list[i], list[pivot]);
-            pivot--;
-        }
-
-        else
-            i++;
+while (i <= j) {
+    while (arr[i] < pivot)
+    i++;
+    while (arr[j] > pivot)
+        j--;
+    if (i <= j) {
+        std::swap(arr[i], arr[j]);
+        i++;
+        j--;
     }
-    return pivot;
-}
+}        
+if (left < j)
+    QuickSort(arr, left, j);
 
-void quickSort(int list[], int start, int end)
-{
-    if (start < end)
-    {
-        int pivot = partition(list, start, end);
-
-        quickSort(list, start, pivot - 1);
-        quickSort(list, pivot + 1, end);
-    }
+if (i < right)
+    QuickSort(arr, i, right);
 }
 
 // merge sort
 
-void merge(int list[], int start, int end, int mid)
-{
-    int mergedList[8];
-    int i, j, k;
-    i = start;
-    k = start;
-    j = mid + 1;
+void merge(std::vector<int>& arr, const int left, const int mid, const int right) {
 
-    while (i <= mid && j <= end)
-    {
-        if (list[i] < list[j])
-        {
-            mergedList[k] = list[i];
-            k++;
-            i++;
-        }
-        else
-        {
-            mergedList[k] = list[j];
-            k++;
-            j++;
-        }
-    }
+const int n1 = mid - left + 1;
+const int n2 = right - mid;
 
-    while (i <= mid)
-    {
-        mergedList[k] = list[i];
-        k++;
-        i++;
-    }
+std::vector<int> left_arr(n1), right_arr(n2);
 
-    while (j <= end)
-    {
-        mergedList[k] = list[j];
-        k++;
-        j++;
-    }
+for (int i = 0; i < n1; i++)
+    left_arr[i] = arr[left + i];
 
-    for (i = start; i < k; i++)
-    {
-        list[i] = mergedList[i];
-    }
+for (int j = 0; j < n2; j++)
+    right_arr[j] = arr[mid + 1 + j];
+
+int i = 0, j = 0, k = left;
+
+while (i < n1 && j < n2) {
+    if (left_arr[i] <= right_arr[j])
+        arr[k] = left_arr[i++];
+    else
+        arr[k] = right_arr[j++];
+    k++;
 }
 
-void mergeSort(int list[], int start, int end)
-{
-    int mid;
-    if (start < end)
-    {
+while (i < n1)
+    arr[k++] = left_arr[i++];
 
-        mid = (start + end) / 2;
-        mergeSort(list, start, mid);
-        mergeSort(list, mid + 1, end);
-        merge(list, start, end, mid);
-    }
+while (j < n2)
+    arr[k++] = right_arr[j++];
+
+}
+void MergeSort(std::vector<int>& arr, const int left, const int right) {
+if (left >= right)
+return;
+const int mid = left + (right - left) / 2;
+MergeSort(arr, left, mid);
+MergeSort(arr, mid + 1, right);
+merge(arr, left, mid, right);
 }
 
 void shellSort(int list[], int listLength)
