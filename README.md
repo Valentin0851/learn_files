@@ -1,1 +1,1 @@
-# learning files of cpp syntax and algs ans data
+# learning files of cpp syntax and algs and data
