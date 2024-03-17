@@ -1,11 +1,4 @@
-#include <vector>
-#include <string>
-#include <iostream>
-#include <stdlib.h>
-#include <time.h>
-#include <iostream>
-#include <math.h>
-#include <vector>
+#include"includes.h"
 
 const int INF = 1e9;
 
@@ -197,7 +190,7 @@ double foo(double x)
 {
     if (x < 0)
     {
-        return abs(x);
+        return std::abs(x);
     }
     if (x == 0)
     {
