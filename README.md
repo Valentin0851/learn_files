@@ -1,1 +1,1 @@
-# git-course
+# learning files of cpp syntax and algs ans data
